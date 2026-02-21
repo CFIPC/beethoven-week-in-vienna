@@ -57,12 +57,28 @@
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
             const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [isScrolled, setIsScrolled] = useState(false);
             const [formStatus, setFormStatus] = useState('idle');
             const menuRef = useRef(null);
+            const closeTimeout = useRef(null);
 
             const applicationLink = "https://forms.fillout.com/t/nNCmHVSCspus";
             const deadlineDate = "1st of May 2026";
             const contactEmail = "office@themusicagency.eu";
+
+            // Scroll listener for dynamic header coloring
+            useEffect(() => {
+                const handleScroll = () => {
+                    // Threshold: when user scrolls past the hero section (~80% of viewport height)
+                    if (window.scrollY > window.innerHeight * 0.8) {
+                        setIsScrolled(true);
+                    } else {
+                        setIsScrolled(false);
+                    }
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
 
             useEffect(() => {
                 window.scrollTo(0, 0);
@@ -78,9 +94,22 @@
                 }, 1500);
             };
 
+            const handleMenuOpen = () => {
+                if (closeTimeout.current) clearTimeout(closeTimeout.current);
+                setIsMenuOpen(true);
+            };
+
+            const handleMenuClose = () => {
+                // Stay open for 300ms to allow user to reach the dropdown without it closing
+                closeTimeout.current = setTimeout(() => {
+                    setIsMenuOpen(false);
+                }, 300);
+            };
+
             const Header = () => {
-                const isDarkBg = currentPage === 'home';
-                // Dynamic colors: Pure black for light backgrounds
+                // Header is dark only if on Home page AND NOT scrolled down
+                const isDarkBg = currentPage === 'home' && !isScrolled;
+                
                 const iconColor = isDarkBg ? 'text-white hover:text-stone-300' : 'text-black hover:text-stone-600';
                 const logoTitleColor = isDarkBg ? 'text-white' : 'text-black';
                 const borderColor = isDarkBg ? 'border-white/10' : 'border-stone-200';
@@ -100,9 +129,9 @@
                             
                             {/* Left: Menu Toggle Button (3 lines) */}
                             <div 
-                                className="relative flex items-center"
-                                onMouseEnter={() => setIsMenuOpen(true)}
-                                onMouseLeave={() => setIsMenuOpen(false)}
+                                className="relative flex items-center py-4"
+                                onMouseEnter={handleMenuOpen}
+                                onMouseLeave={handleMenuClose}
                                 ref={menuRef}
                             >
                                 <button 
@@ -113,7 +142,8 @@
                                     {isMenuOpen ? <Icons.X /> : <Icons.Menu />}
                                 </button>
 
-                                <div className={`menu-dropdown absolute top-full left-0 w-64 mt-2 py-6 bg-white shadow-2xl rounded-sm border border-stone-100 ${isMenuOpen ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'}`}>
+                                {/* Dropdown Menu */}
+                                <div className={`menu-dropdown absolute top-full left-0 w-64 py-6 bg-white shadow-2xl rounded-sm border border-stone-100 ${isMenuOpen ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'}`}>
                                     <nav className="flex flex-col">
                                         {menuItems.map((item) => (
                                             <button
@@ -122,7 +152,7 @@
                                                 onClick={() => !item.disabled && setCurrentPage(item.id)}
                                                 className={`px-8 py-3 text-left text-[11px] font-bold tracking-[0.2em] transition-colors
                                                     ${item.disabled ? 'text-stone-300 cursor-default' : 'text-black hover:text-stone-600 hover:bg-stone-50'}
-                                                    ${currentPage === item.id ? 'text-stone-900 bg-stone-50 font-black' : ''}
+                                                    ${currentPage === item.id ? 'text-stone-900 bg-stone-50 font-black underline underline-offset-4' : ''}
                                                 `}
                                             >
                                                 {item.label}
@@ -132,7 +162,7 @@
                                 </div>
                             </div>
 
-                            {/* Center Logo Area - logo.png on the LEFT of the text */}
+                            {/* Center Logo Area */}
                             <div className="flex items-center gap-6 cursor-pointer absolute left-1/2 -translate-x-1/2 group" onClick={() => setCurrentPage('home')}>
                                 <img 
                                     src="logo.png" 
@@ -151,7 +181,7 @@
                                 </div>
                             </div>
 
-                            {/* Right: Application Button - Also black on white background */}
+                            {/* Right: Application Button */}
                             <div className="flex items-center">
                                 <a 
                                     href={applicationLink} 
@@ -209,7 +239,6 @@
                         </section>
                         <section className="py-32 px-6 bg-white">
                             <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-                                {/* Frame updated to aspect-[1116/1790] */}
                                 <div className="aspect-[1116/1790] bg-stone-100 rounded-sm overflow-hidden shadow-lg sticky top-32">
                                     <img src="timeline.png" alt="" className="w-full h-full object-cover grayscale" onError={(e) => e.target.src='https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&q=80&w=1000'} />
                                 </div>
