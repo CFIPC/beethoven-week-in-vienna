@@ -134,10 +134,8 @@
                 const menuItems = [
                     { id: 'home', label: 'HOME' },
                     { id: 'masterclass', label: 'THE MASTERCLASS' },
-                    { id: 'competition_page', label: 'THE COMPETITION' },
                     { id: 'practical', label: 'PRACTICAL INFORMATION' },
-                    { id: 'rules', label: 'RULES', disabled: true },
-                    { id: 'jury', label: 'JURY', disabled: true },
+                    { id: 'competition', label: 'COMPETITION', disabled: true },
                     { id: 'about', label: 'ABOUT', disabled: true }
                 ];
 
@@ -193,7 +191,6 @@
                 const timeline = [
                     { event: "Start of the Masterclasses", day: "June 22, 2026" },
                     { event: "Lecture - Boaz Sharon", day: "June 23, 2026" },
-                    { event: "Competition", day: "June 24, 2026" },
                     { event: "Lecture - Vincenzo Balzani", day: "June 25, 2026" },
                     { event: "Solo concert", day: "June 26" },
                     { event: "2-piano audition", day: "June 27, 2026" },
@@ -209,13 +206,13 @@
                             </div>
                             <div className="relative z-10 text-center px-4">
                                 <h1 className="font-serif text-5xl md:text-9xl text-white mb-6 leading-tight">Beethoven Week in Vienna</h1>
-                                <p className="text-xl md:text-3xl text-white font-serif italic mb-8">June 22 — 28, 2026</p>
+                                <p className="text-xl md:text-3xl text-white font-serif italic mb-8">June 22 - 28, 2026</p>
                                 <div className="flex flex-wrap justify-center gap-4 md:gap-10 text-[11px] md:text-[14px] uppercase tracking-[0.2em] md:tracking-[0.4em] text-white font-bold mb-12 md:mb-16 opacity-90">
-                                    <span>competition</span><span>masterclass</span><span>concerts</span><span>lectures</span>
+                                    <span>masterclass</span><span>concerts</span><span>lectures</span>
                                 </div>
                                 <div className="flex flex-col sm:flex-row justify-center gap-6 md:gap-12">
-                                    <button onClick={() => setCurrentPage('competition_page')} className="px-10 md:px-16 py-4 md:py-5 bg-[#d1a6a1] text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm shadow-xl transition-transform hover:-translate-y-1">The Competition</button>
                                     <button onClick={() => setCurrentPage('masterclass')} className="px-10 md:px-16 py-4 md:py-5 bg-[#d1a6a1] text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm shadow-xl transition-transform hover:-translate-y-1">The Masterclass</button>
+                                    <button onClick={() => setCurrentPage('practical')} className="px-10 md:px-16 py-4 md:py-5 border border-white/50 text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm backdrop-blur-sm transition-all hover:bg-white hover:text-stone-900">Information</button>
                                 </div>
                             </div>
                         </section>
@@ -223,18 +220,17 @@
                         <section className="py-20 md:py-32 px-6 bg-[#f9f7f2]">
                             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
                                 <div className="md:w-1/2">
-                                   <h2 className="font-serif text-4xl md:text-5xl text-stone-800 leading-tight">1st edition of the <br className="hidden md:block" /> <span className="italic">Beethoven Week in Vienna</span></h2>
+                                    <h2 className="font-serif text-4xl md:text-5xl text-stone-800 leading-tight">1st edition of the <br className="hidden md:block" /> <span className="italic">Beethoven Week in Vienna</span></h2>
                                 </div>
                                 <div className="md:w-1/2 space-y-6">
                                   <div className="w-12 h-px bg-[#d1a6a1]"></div>
-                                  <p className="text-stone-600 leading-relaxed text-base md:text-lg italic">A unique celebration of musical excellence, combining intensive masterclasses with prestigious competitions and gala concerts in the historic venues of Vienna.</p>
+                                  <p className="text-stone-600 leading-relaxed text-base md:text-lg italic">A unique celebration of musical excellence, combining intensive masterclasses with gala concerts and lectures in the historic venues of Vienna .</p>
                                 </div>
                             </div>
                         </section>
 
                         <section className="py-20 md:py-32 px-6 bg-white overflow-hidden">
                             <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start">
-                                {/* FIXED: Stacks on mobile, non-sticky on small screens */}
                                 <div className="w-full md:w-1/2 order-2 md:order-1">
                                     <div className="aspect-[1116/1790] bg-stone-100 rounded-sm overflow-hidden shadow-lg md:sticky md:top-32 mobile-non-sticky">
                                         <img src="timeline.png" alt="Timeline" className="w-full h-full object-cover" onError={(e) => e.target.src='https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&q=80&w=1000'} />
@@ -266,8 +262,8 @@
                                 <div className="mb-12 md:mb-16">
                                     <h1 className="font-serif text-4xl md:text-6xl text-[#d1a6a1] italic leading-tight mb-6 md:mb-8">General information</h1>
                                     <div className="space-y-4 italic text-stone-700 text-base md:text-lg">
-                                        <p>One week of masterclasses, concerts and lectures</p>
-                                        <p>Professors: Boaz Sharon, Philippe Raskin & Vincenzo Balzani</p>
+                                        <p>One week of masterclasses , concerts and lectures</p>
+                                        <p>Professors : Boaz Sharon , Philippe Raskin & Vincenzo Balzani</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
@@ -290,8 +286,8 @@
                             <div className="max-w-6xl mx-auto">
                                 <h2 className="font-serif text-3xl md:text-5xl text-stone-800 italic mb-10 md:mb-12 underline decoration-[#d1a6a1]/30 underline-offset-8">Application Information</h2>
                                 <div className="space-y-6 mb-12 md:mb-16 italic text-stone-800 font-bold text-lg md:text-xl">
-                                    <p>Deadline: {deadlineDate}</p>
-                                    <p>Procedure: fill out the Form via <a href={applicationLink} target="_blank" className="text-[#d1a6a1] break-all underline">THIS LINK</a></p>
+                                    <p>Deadline : {deadlineDate}</p>
+                                    <p>Procedure : fill out the Form via <a href={applicationLink} target="_blank" className="text-[#d1a6a1] break-all underline">THIS LINK</a></p>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
                                     <div className="border-l-2 border-[#d1a6a1] pl-6 md:pl-8">
@@ -310,7 +306,7 @@
                           <div className="max-w-6xl mx-auto">
                             <h2 className="font-serif text-3xl md:text-5xl text-stone-800 italic mb-10 md:mb-12">Pricing Details</h2>
                             <div className="bg-white/50 p-6 md:p-12 rounded-sm border border-white/40 italic">
-                                <h4 className="font-serif text-xl md:text-2xl italic mb-6">Masterclass fees:</h4>
+                                <h4 className="font-serif text-xl md:text-2xl italic mb-6">Masterclass fees :</h4>
                                 <div className="space-y-3 font-bold text-stone-800 uppercase tracking-wide text-xs md:text-sm mb-10">
                                     <p>BEETHOVEN CONCERTO SOLOIST - 850 €</p>
                                     <p>SOLO RECITAL PARTICIPANT - 550 €</p>
@@ -319,12 +315,12 @@
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-sm">
                                     <div className="space-y-1 border-l border-stone-300 pl-4 md:pl-6">
-                                        <p><span className="font-bold">Account:</span> Interpretation.eu</p>
-                                        <p className="break-all"><span className="font-bold">IBAN:</span> BE71 3630 7938 7769</p>
-                                        <p><span className="font-bold">BIC:</span> BBRUBEBB</p>
+                                        <p><span className="font-bold">Account :</span> Interpretation.eu</p>
+                                        <p className="break-all"><span className="font-bold">IBAN :</span> BE71 3630 7938 7769</p>
+                                        <p><span className="font-bold">BIC :</span> BBRUBEBB</p>
                                     </div>
                                     <div className="bg-[#d1a6a1]/10 p-4 md:p-6 border-l-2 border-[#d1a6a1]">
-                                        <p>Subject: <span className="font-bold">Name + Chosen Masterclass.</span></p>
+                                        <p>Subject : <span className="font-bold">Name + Chosen Masterclass .</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -333,13 +329,6 @@
                     </div>
                 );
             };
-
-            const CompetitionPage = () => (
-                <div className="pt-32 pb-20 animate-in fade-in duration-700 bg-white min-h-screen text-center px-6">
-                    <h1 className="font-serif text-4xl md:text-6xl text-[#d1a6a1] italic mb-8">The Competition</h1>
-                    <p className="text-stone-500 font-serif text-lg md:text-xl italic max-w-2xl mx-auto">Information will be available here soon.</p>
-                </div>
-            );
 
             const PracticalInfoPage = () => (
                 <div className="pt-32 animate-in fade-in duration-700 bg-white min-h-screen">
@@ -352,7 +341,7 @@
                                         { label: "Masterclass Locations", content: "MusikQuartier 1040, Mühlgasse 30, 1040 Wien\nMusikQuartier 1070, Kaiserstraße 10, 1070 Wien" },
                                         { label: "Concert Locations", content: "Palais Ehrbar (Mühlgasse 30, 1040 Wien)" },
                                         { label: "Lecture Location", content: "Ensembleraum (MusikQuartier 1070)" },
-                                        { label: "Contact", content: "Cristiana Dragos (General Manager):\n+32 456 708 920\n" + contactEmail }
+                                        { label: "Contact", content: "Cristiana Dragos (General Manager) :\n+32 456 708 920\n" + contactEmail }
                                     ].map((item, i) => (
                                         <div key={i} className="flex flex-col border-b border-stone-100 pb-6">
                                             <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{item.label}</span>
@@ -391,7 +380,6 @@
                         {currentPage === 'home' && <HomePage />}
                         {currentPage === 'masterclass' && <MasterclassPage />}
                         {currentPage === 'practical' && <PracticalInfoPage />}
-                        {currentPage === 'competition_page' && <CompetitionPage />}
                     </main>
                     <footer className="py-12 md:py-16 border-t border-stone-100 flex flex-col items-center px-6">
                         <h3 className="font-serif text-2xl md:text-3xl italic text-stone-800 mb-6">The Music Agency</h3>
