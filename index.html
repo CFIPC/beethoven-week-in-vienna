@@ -135,7 +135,8 @@
                     { id: 'home', label: 'HOME' },
                     { id: 'masterclass', label: 'THE MASTERCLASS' },
                     { id: 'practical', label: 'PRACTICAL INFORMATION' },
-                    { id: 'competition', label: 'COMPETITION', disabled: true },
+                    { id: 'rules', label: 'RULES', disabled: true },
+                    { id: 'jury', label: 'JURY', disabled: true },
                     { id: 'about', label: 'ABOUT', disabled: true }
                 ];
 
@@ -224,7 +225,7 @@
                                 </div>
                                 <div className="md:w-1/2 space-y-6">
                                   <div className="w-12 h-px bg-[#d1a6a1]"></div>
-                                  <p className="text-stone-600 leading-relaxed text-base md:text-lg italic">A unique celebration of musical excellence, combining intensive masterclasses with gala concerts and lectures in the historic venues of Vienna .</p>
+                                  <p className="text-stone-600 leading-relaxed text-base md:text-lg italic">A unique celebration of musical excellence , combining intensive masterclasses with gala concerts and lectures in the historic venues of Vienna .</p>
                                 </div>
                             </div>
                         </section>
@@ -295,7 +296,7 @@
                                         <ul className="space-y-3 text-stone-600 italic text-sm md:text-base"><li>6 lessons of 45 minutes</li><li>Solo concert (maximum 25 minutes)</li><li>Free entrance to all festival concerts & lectures</li></ul>
                                     </div>
                                     <div className="border-l-2 border-[#d1a6a1] pl-6 md:pl-8">
-                                        <h3 className="font-serif text-xl md:text-2xl border-b border-stone-200 pb-2 inline-block mb-6 italic"><Asterisk />Recital Participant</h3>
+                                        <h3 className="font-serif text-xl md:text-2xl border-b border-stone-200 pb-2 inline-block mb-6 italic"><Asterisk />Solo Participant</h3>
                                         <ul className="space-y-3 text-stone-600 italic text-sm md:text-base"><li>6 lessons of 45 minutes</li><li>Solo concert (max 15 min)</li></ul>
                                     </div>
                                 </div>
@@ -341,9 +342,8 @@
                                         { label: "Masterclass Locations", content: "MusikQuartier 1040, Mühlgasse 30, 1040 Wien\nMusikQuartier 1070, Kaiserstraße 10, 1070 Wien" },
                                         { label: "Concert Locations", content: "Palais Ehrbar (Mühlgasse 30, 1040 Wien)" },
                                         { label: "Lecture Location", content: "Ensembleraum (MusikQuartier 1070)" },
-                                        { label: "Contact", content: "Cristiana Dragos :\n+32 456 708 920\n" + contactEmail }
-                                        { label: "Contact", content: "Ana Boca :contactEmail:info@themusicagency.eu }
-
+                                        { label: "Contact", content: "Cristiana Dragos :\n+32 456 708 920\n" + contactEmail },
+                                        { label: "Contact", content: "Ana Boca :\ninfo@themusicagency.eu" }
                                     ].map((item, i) => (
                                         <div key={i} className="flex flex-col border-b border-stone-100 pb-6">
                                             <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{item.label}</span>
