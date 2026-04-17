@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beethoven Week in Vienna</title>
+    <!-- Preload critical hero image -->
+    <link rel="preload" fetchpriority="high" as="image" href="home.png" type="image/png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React and Babel for JSX support in browser -->
@@ -33,7 +35,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
+        /* Mobile adjustment for sticky timeline - Updated to 1024px */
+        @media (max-width: 1024px) {
             .mobile-non-sticky {
                 position: relative !important;
                 top: 0 !important;
@@ -91,8 +94,8 @@
                     <header className={`fixed top-0 left-0 right-0 z-50 header-transition backdrop-blur-md border-b ${headerBg} ${borderColor}`}>
                         <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 md:h-28 flex items-center relative">
                             
-                            {/* Navigation Links - Left Side */}
-                            <nav className="hidden md:flex flex-1 items-center gap-10">
+                            {/* Desktop Navigation - Left Side (Hidden until lg: 1024px) */}
+                            <div className="hidden lg:flex flex-1 items-center gap-10">
                                 <a 
                                     href="/masterclass"
                                     className={`text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
@@ -105,10 +108,10 @@
                                 >
                                     PRACTICAL INFORMATION
                                 </a>
-                            </nav>
+                            </div>
 
-                            {/* Mobile Hamburger Toggle - Left side */}
-                            <div className="flex md:hidden flex-1 items-center">
+                            {/* Mobile Hamburger Toggle - Left side (Visible until lg: 1024px) */}
+                            <div className="flex lg:hidden flex-1 items-center">
                                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={textColor}>
                                     {isMobileMenuOpen ? <Icons.X /> : <Icons.Menu />}
                                 </button>
@@ -116,7 +119,7 @@
 
                             {/* Logo - Middle */}
                             <a href="/" className="flex items-center gap-2 md:gap-4 cursor-pointer absolute left-1/2 -translate-x-1/2">
-                                <img src="logo.png" alt="Logo" className="h-10 md:h-16 w-auto object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                <img src="logo.png" alt="Logo" className="h-10 md:h-16 w-auto object-contain" decoding="async" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                 <div style={{display: 'none'}} className="flex items-center justify-center"><Icons.Music /></div>
                                 <div className="flex flex-col leading-none">
                                     <span className={`text-[11px] md:text-[14px] font-serif uppercase tracking-[0.1em] md:tracking-[0.2em] block font-bold ${textColor}`}>Beethoven Week</span>
@@ -130,9 +133,9 @@
                             </div>
                         </div>
 
-                        {/* Mobile Menu Dropdown */}
+                        {/* Mobile Menu Dropdown (Visible until lg: 1024px) */}
                         {isMobileMenuOpen && (
-                            <div className="md:hidden bg-white border-t border-stone-100 mobile-menu-enter px-6 py-8 flex flex-col gap-6 shadow-xl">
+                            <div className="lg:hidden bg-white border-t border-stone-100 mobile-menu-enter px-6 py-8 flex flex-col gap-6 shadow-xl">
                                 <a href="/masterclass" className="text-[11px] font-bold tracking-[0.2em] text-left text-black">THE MASTERCLASS</a>
                                 <a href="/practical-information" className="text-[11px] font-bold tracking-[0.2em] text-left text-black">PRACTICAL INFORMATION</a>
                             </div>
@@ -148,7 +151,7 @@
                         <div className="animate-in fade-in duration-700">
                             <section className="relative h-screen flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 z-0 bg-stone-900">
-                                    <img src="home.png" alt="" className="w-full h-full object-cover opacity-60" onError={(e) => e.target.src='https://images.unsplash.com/photo-1520529688591-b197b0d3c059?auto=format&fit=crop&q=80&w=2000'} />
+                                    <img src="home.png" alt="" className="w-full h-full object-cover opacity-60" fetchpriority="high" decoding="sync" onError={(e) => e.target.src='https://images.unsplash.com/photo-1520529688591-b197b0d3c059?auto=format&fit=crop&q=80&w=2000'} />
                                     <div className="absolute inset-0 bg-stone-900/30"></div>
                                 </div>
                                 <div className="relative z-10 text-center px-4">
@@ -165,11 +168,11 @@
                             </section>
 
                             <section className="py-20 md:py-32 px-6 bg-[#f9f7f2]">
-                                <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
-                                    <div className="md:w-1/2">
+                                <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+                                    <div className="lg:w-1/2">
                                         <h2 className="font-serif text-4xl md:text-5xl text-stone-800 leading-tight">1st edition of the <br className="hidden md:block" /> <span className="italic">Beethoven Week in Vienna</span></h2>
                                     </div>
-                                    <div className="md:w-1/2 space-y-6">
+                                    <div className="lg:w-1/2 space-y-6">
                                         <div className="w-12 h-px bg-[#d1a6a1]"></div>
                                         <p className="text-stone-600 leading-relaxed text-base md:text-lg italic">A unique celebration of musical excellence , combining intensive masterclasses with gala concerts and lectures in the historic venues of Vienna .</p>
                                     </div>
@@ -177,13 +180,13 @@
                             </section>
 
                             <section className="py-20 md:py-32 px-6 bg-white overflow-hidden">
-                                <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start">
-                                    <div className="w-full md:w-1/2 order-2 md:order-1">
-                                        <div className="aspect-[1116/1790] bg-stone-100 rounded-sm overflow-hidden shadow-lg md:sticky md:top-32 mobile-non-sticky">
-                                            <img src="timeline.png" alt="Timeline" className="w-full h-full object-cover" onError={(e) => e.target.src='https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&q=80&w=1000'} />
+                                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 md:gap-16 items-start">
+                                    <div className="w-full lg:w-1/2 order-2 lg:order-1">
+                                        <div className="aspect-[1116/1790] bg-stone-100 rounded-sm overflow-hidden shadow-lg lg:sticky lg:top-32 mobile-non-sticky">
+                                            <img src="timeline.png" alt="Timeline" className="w-full h-full object-cover" loading="lazy" decoding="async" onError={(e) => e.target.src='https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&q=80&w=1000'} />
                                         </div>
                                     </div>
-                                    <div className="w-full md:w-1/2 order-1 md:order-2">
+                                    <div className="w-full lg:w-1/2 order-1 lg:order-2">
                                         <h2 className="font-serif text-3xl md:text-5xl text-stone-900 mb-8 italic underline decoration-[#d1a6a1]/30 underline-offset-8">The timeline of the festival</h2>
                                         <div className="space-y-0">
                                             {[
