@@ -15,7 +15,6 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        /* Base styles to prevent white flash and handle instant background */
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #1c1917; /* stone-900 */
@@ -23,15 +22,6 @@
         }
         .font-serif { font-family: 'Playfair Display', serif; }
         
-        /* CSS-based hero background for immediate loading before React boots */
-        .hero-background {
-            background-image: linear-gradient(rgba(28, 25, 23, 0.3), rgba(28, 25, 23, 0.3)), url('home.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-        }
-
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -50,7 +40,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive adjustments for layout */
         @media (max-width: 1024px) {
             .mobile-non-sticky {
                 position: relative !important;
@@ -165,11 +154,21 @@
                     <main>
                         <div className="animate-in fade-in duration-700">
                             <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                                {/* The background is now handled by the CSS class 'hero-background' for instant loading */}
-                                <div className="absolute inset-0 z-0 hero-background"></div>
+                                {/* Fixed image setup : inside a dark stone-900 container to prevent the "white" effect */}
+                                <div className="absolute inset-0 z-0 bg-stone-900">
+                                    <img 
+                                        src="home.png" 
+                                        alt="" 
+                                        className="w-full h-full object-cover opacity-60" 
+                                        fetchpriority="high" 
+                                        decoding="sync" 
+                                        onError={(e) => e.target.src='https://images.unsplash.com/photo-1520529688591-b197b0d3c059?auto=format&fit=crop&q=80&w=2000'} 
+                                    />
+                                    <div className="absolute inset-0 bg-stone-900/30"></div>
+                                </div>
                                 
                                 <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-                                    <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
+                                    <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
                                         Beethoven Week in Vienna
                                     </h1>
                                     <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-serif italic mb-6 md:mb-8">
