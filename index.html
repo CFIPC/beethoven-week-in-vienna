@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beethoven Week in Vienna</title>
-    <!-- Preload critical hero image -->
+    <!-- Preload critical hero image for instant availability -->
     <link rel="preload" fetchpriority="high" as="image" href="home.png" type="image/png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,8 +15,23 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        /* Base styles to prevent white flash and handle instant background */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #1c1917; /* stone-900 */
+            margin: 0;
+        }
         .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* CSS-based hero background for immediate loading before React boots */
+        .hero-background {
+            background-image: linear-gradient(rgba(28, 25, 23, 0.3), rgba(28, 25, 23, 0.3)), url('home.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -35,7 +50,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobile adjustment for sticky timeline - Updated to 1024px */
+        /* Responsive adjustments for layout */
         @media (max-width: 1024px) {
             .mobile-non-sticky {
                 position: relative !important;
@@ -94,23 +109,23 @@
                     <header className={`fixed top-0 left-0 right-0 z-50 header-transition backdrop-blur-md border-b ${headerBg} ${borderColor}`}>
                         <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 md:h-28 flex items-center relative">
                             
-                            {/* Desktop Navigation - Left Side (Hidden until lg: 1024px) */}
-                            <div className="hidden lg:flex flex-1 items-center gap-10">
+                            {/* Desktop Navigation - Left Side */}
+                            <nav className="hidden lg:flex flex-1 items-center gap-6 xl:gap-10">
                                 <a 
                                     href="/masterclass"
-                                    className={`text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
+                                    className={`text-[10px] xl:text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
                                 >
                                     THE MASTERCLASS
                                 </a>
                                 <a 
                                     href="/practical-information"
-                                    className={`text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
+                                    className={`text-[10px] xl:text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
                                 >
                                     PRACTICAL INFORMATION
                                 </a>
-                            </div>
+                            </nav>
 
-                            {/* Mobile Hamburger Toggle - Left side (Visible until lg: 1024px) */}
+                            {/* Mobile Hamburger Toggle - Left side */}
                             <div className="flex lg:hidden flex-1 items-center">
                                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={textColor}>
                                     {isMobileMenuOpen ? <Icons.X /> : <Icons.Menu />}
@@ -119,11 +134,11 @@
 
                             {/* Logo - Middle */}
                             <a href="/" className="flex items-center gap-2 md:gap-4 cursor-pointer absolute left-1/2 -translate-x-1/2">
-                                <img src="logo.png" alt="Logo" className="h-10 md:h-16 w-auto object-contain" decoding="async" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                <img src="logo.png" alt="Logo" className="h-10 md:h-14 xl:h-16 w-auto object-contain" decoding="async" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                 <div style={{display: 'none'}} className="flex items-center justify-center"><Icons.Music /></div>
                                 <div className="flex flex-col leading-none">
-                                    <span className={`text-[11px] md:text-[14px] font-serif uppercase tracking-[0.1em] md:tracking-[0.2em] block font-bold ${textColor}`}>Beethoven Week</span>
-                                    <span className={`text-[9px] md:text-[12px] font-serif uppercase tracking-widest block opacity-70 ${textColor}`}>in Vienna</span>
+                                    <span className={`text-[10px] md:text-[12px] xl:text-[14px] font-serif uppercase tracking-[0.1em] md:tracking-[0.2em] block font-bold ${textColor}`}>Beethoven Week</span>
+                                    <span className={`text-[8px] md:text-[10px] xl:text-[12px] font-serif uppercase tracking-widest block opacity-70 ${textColor}`}>in Vienna</span>
                                 </div>
                             </a>
 
@@ -133,7 +148,7 @@
                             </div>
                         </div>
 
-                        {/* Mobile Menu Dropdown (Visible until lg: 1024px) */}
+                        {/* Mobile Menu Dropdown */}
                         {isMobileMenuOpen && (
                             <div className="lg:hidden bg-white border-t border-stone-100 mobile-menu-enter px-6 py-8 flex flex-col gap-6 shadow-xl">
                                 <a href="/masterclass" className="text-[11px] font-bold tracking-[0.2em] text-left text-black">THE MASTERCLASS</a>
@@ -150,19 +165,22 @@
                     <main>
                         <div className="animate-in fade-in duration-700">
                             <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 z-0 bg-stone-900">
-                                    <img src="home.png" alt="" className="w-full h-full object-cover opacity-60" fetchpriority="high" decoding="sync" onError={(e) => e.target.src='https://images.unsplash.com/photo-1520529688591-b197b0d3c059?auto=format&fit=crop&q=80&w=2000'} />
-                                    <div className="absolute inset-0 bg-stone-900/30"></div>
-                                </div>
-                                <div className="relative z-10 text-center px-4">
-                                    <h1 className="font-serif text-5xl md:text-9xl text-white mb-6 leading-tight">Beethoven Week in Vienna</h1>
-                                    <p className="text-xl md:text-3xl text-white font-serif italic mb-8">June 22 - 28, 2026</p>
-                                    <div className="flex flex-wrap justify-center gap-4 md:gap-10 text-[11px] md:text-[14px] uppercase tracking-[0.2em] md:tracking-[0.4em] text-white font-bold mb-12 md:mb-16 opacity-90">
+                                {/* The background is now handled by the CSS class 'hero-background' for instant loading */}
+                                <div className="absolute inset-0 z-0 hero-background"></div>
+                                
+                                <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+                                    <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
+                                        Beethoven Week in Vienna
+                                    </h1>
+                                    <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-serif italic mb-6 md:mb-8">
+                                        June 22 - 28, 2026
+                                    </p>
+                                    <div className="flex flex-wrap justify-center gap-4 md:gap-10 text-[9px] sm:text-[11px] md:text-[14px] uppercase tracking-[0.2em] md:tracking-[0.4em] text-white font-bold mb-10 md:mb-16 opacity-90">
                                         <span>masterclass</span><span>concerts</span><span>lectures</span>
                                     </div>
-                                    <div className="flex flex-col sm:flex-row justify-center gap-6 md:gap-12">
-                                        <a href="/masterclass" className="px-10 md:px-16 py-4 md:py-5 bg-[#d1a6a1] text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm shadow-xl transition-transform hover:-translate-y-1 text-center">The Masterclass</a>
-                                        <a href="/practical-information" className="px-10 md:px-16 py-4 md:py-5 border border-white/50 text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm backdrop-blur-sm transition-all hover:bg-white hover:text-stone-900 text-center">Contact us</a>
+                                    <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-12">
+                                        <a href="/masterclass" className="px-8 md:px-16 py-4 md:py-5 bg-[#d1a6a1] text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm shadow-xl transition-transform hover:-translate-y-1 text-center">The Masterclass</a>
+                                        <a href="/practical-information" className="px-8 md:px-16 py-4 md:py-5 border border-white/50 text-white uppercase tracking-widest text-[10px] md:text-[12px] font-bold rounded-sm backdrop-blur-sm transition-all hover:bg-white hover:text-stone-900 text-center">Contact us</a>
                                     </div>
                                 </div>
                             </section>
@@ -170,7 +188,7 @@
                             <section className="py-20 md:py-32 px-6 bg-[#f9f7f2]">
                                 <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-10 md:gap-16">
                                     <div className="lg:w-1/2">
-                                        <h2 className="font-serif text-4xl md:text-5xl text-stone-800 leading-tight">1st edition of the <br className="hidden md:block" /> <span className="italic">Beethoven Week in Vienna</span></h2>
+                                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-stone-800 leading-tight">1st edition of the <br className="hidden md:block" /> <span className="italic">Beethoven Week in Vienna</span></h2>
                                     </div>
                                     <div className="lg:w-1/2 space-y-6">
                                         <div className="w-12 h-px bg-[#d1a6a1]"></div>
