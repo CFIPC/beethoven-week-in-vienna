@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practical Information - Beethoven Week in Vienna</title>
+    <!-- Preload logo for instant availability -->
+    <link rel="preload" fetchpriority="high" as="image" href="logo.png" type="image/png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React and Babel for JSX support in browser -->
@@ -13,7 +15,11 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff;
+            margin: 0;
+        }
         .font-serif { font-family: 'Playfair Display', serif; }
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -31,6 +37,14 @@
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Consistency with home and masterclass pages */
+        @media (max-width: 1024px) {
+            .mobile-non-sticky {
+                position: relative !important;
+                top: 0 !important;
+            }
         }
     </style>
 </head>
@@ -110,24 +124,24 @@
                     <header className={`fixed top-0 left-0 right-0 z-50 header-transition backdrop-blur-md border-b ${headerBg} ${borderColor}`}>
                         <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 md:h-28 flex items-center relative">
                             
-                            {/* Desktop Navigation - Left Side */}
-                            <div className="hidden md:flex flex-1 items-center gap-10">
+                            {/* Desktop Navigation - Left Side (Switch at 1024px) */}
+                            <div className="hidden lg:flex flex-1 items-center gap-6 xl:gap-10">
                                 <a 
                                     href="/masterclass"
-                                    className={`text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
+                                    className={`text-[10px] xl:text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor}`}
                                 >
                                     THE MASTERCLASS
                                 </a>
                                 <a 
                                     href="/practical-information"
-                                    className={`text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor} underline decoration-[#d1a6a1] underline-offset-8`}
+                                    className={`text-[10px] xl:text-[11px] font-bold tracking-[0.2em] transition-colors hover:opacity-60 whitespace-nowrap ${textColor} underline decoration-[#d1a6a1] underline-offset-8`}
                                 >
                                     PRACTICAL INFORMATION
                                 </a>
                             </div>
 
                             {/* Mobile Hamburger Toggle - Left Side */}
-                            <div className="flex md:hidden flex-1 items-center">
+                            <div className="flex lg:hidden flex-1 items-center">
                                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={textColor}>
                                     {isMobileMenuOpen ? <Icons.X /> : <Icons.Menu />}
                                 </button>
@@ -135,11 +149,11 @@
 
                             {/* Logo - Middle */}
                             <a href="/" className="flex items-center gap-2 md:gap-4 cursor-pointer absolute left-1/2 -translate-x-1/2">
-                                <img src="logo.png" alt="Logo" className="h-10 md:h-16 w-auto object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                <img src="logo.png" alt="Logo" className="h-10 md:h-14 xl:h-16 w-auto object-contain" fetchpriority="high" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                 <div style={{display: 'none'}} className="flex items-center justify-center"><Icons.Music /></div>
                                 <div className="flex flex-col leading-none">
-                                    <span className={`text-[11px] md:text-[14px] font-serif uppercase tracking-[0.1em] md:tracking-[0.2em] block font-bold ${textColor}`}>Beethoven Week</span>
-                                    <span className={`text-[9px] md:text-[12px] font-serif uppercase tracking-widest block opacity-70 ${textColor}`}>in Vienna</span>
+                                    <span className={`text-[10px] md:text-[12px] xl:text-[14px] font-serif uppercase tracking-[0.1em] md:tracking-[0.2em] block font-bold ${textColor}`}>Beethoven Week</span>
+                                    <span className={`text-[8px] md:text-[10px] xl:text-[12px] font-serif uppercase tracking-widest block opacity-70 ${textColor}`}>in Vienna</span>
                                 </div>
                             </a>
 
@@ -151,7 +165,7 @@
 
                         {/* Mobile Menu Dropdown */}
                         {isMobileMenuOpen && (
-                            <div className="md:hidden bg-white border-t border-stone-100 mobile-menu-enter px-6 py-8 flex flex-col gap-6 shadow-xl">
+                            <div className="lg:hidden bg-white border-t border-stone-100 mobile-menu-enter px-6 py-8 flex flex-col gap-6 shadow-xl">
                                 <a href="/masterclass" className="text-[11px] font-bold tracking-[0.2em] text-left text-black">THE MASTERCLASS</a>
                                 <a href="/practical-information" className="text-[11px] font-bold tracking-[0.2em] text-left text-[#d1a6a1]">PRACTICAL INFORMATION</a>
                             </div>
@@ -163,7 +177,7 @@
             return (
                 <div className="min-h-screen bg-white font-sans selection:bg-[#d1a6a1]/20">
                     <Header />
-                    <main className="pt-24 md:pt-32 animate-in fade-in duration-700 bg-white min-h-screen">
+                    <main className="pt-24 lg:pt-32 animate-in fade-in duration-700 bg-white min-h-screen">
                         <div className="max-w-7xl mx-auto px-6 lg:px-12">
                             <div className="grid lg:grid-cols-2 gap-16 md:gap-24 pb-24 items-start">
                                 <div className="space-y-12">
